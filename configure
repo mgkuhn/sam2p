@@ -7489,5 +7489,5 @@ fi
 
 echo "configure:7517: all OK" >&5
 
-echo "configure done. Now you should run: $MAKE; $MAKE install"
+echo "configure done. Now you should run: ${MAKE:-make}; ${MAKE:-make} install"
 
