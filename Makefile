@@ -24,10 +24,6 @@ endif
 ifeq ($(MAKECMDGOALS),dist-install)
 MAKE_DIST=000
 endif
-ifeq ($(MAKECMDGOALS),Makedep.force)
-MAKE_DIST=000
-endif
-
 BASH=bash
 PERL_BADLANG=x
 export PERL_BADLANG
@@ -92,10 +88,6 @@ else
   endif
   most all:;  # `make MAKE_DIST=x' should be a no-op by default.
 endif
-
-.PHONY: Makedep.force
-# Called by ./configure
-Makedep.force: sam2p_version.h; $(MAKEDEP_CMD)
 
 all1: $(ALL)
 # vvv for Epsilon at Thu Oct 31 09:58:58 CET 2002
