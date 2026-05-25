@@ -28,6 +28,10 @@ BASH=bash
 PERL_BADLANG=x
 export PERL_BADLANG
 
+INSTALL=install
+INSTALL_PROGRAM=$(INSTALL)
+INSTALL_DATA=$(INSTALL) -m 644
+
 CXXX=$(CXD_assert)
 LDALL=$(LDXX) -s $(LDFLAGS) $(LIBS)
 ifeq ($(ENABLE_DEBUG), no)
@@ -210,10 +214,9 @@ dist-install: dist-noautoconf
 	chmod 600 ../sam2p-*.tar.gz
 	scp ../sam2p-*.tar.gz kozma:public_html
 
-# Mac OS/X cp doesn't have -a, so we don't use it
-install: sam2p
-	-mkdir -p '$(bindir)'
-	cp sam2p '$(bindir)'
-	chmod 755 '$(bindir)'/sam2p
+install: all
+	$(INSTALL) -d '$(DESTDIR)$(bindir)' '$(DESTDIR)$(mandir)/man1'
+	$(INSTALL_PROGRAM) sam2p '$(DESTDIR)$(bindir)/sam2p'
+	$(INSTALL_DATA) sam2p.1 '$(DESTDIR)$(mandir)/man1/sam2p.1'
 
 # __END__ of Makefile
